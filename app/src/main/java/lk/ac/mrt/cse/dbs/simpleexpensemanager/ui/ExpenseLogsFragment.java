@@ -40,7 +40,7 @@ import static lk.ac.mrt.cse.dbs.simpleexpensemanager.Constants.EXPENSE_MANAGER;
  */
 public class ExpenseLogsFragment extends Fragment {
     private ExpenseManager currentExpenseManager;
-    private static final String TAG = "MyLogs";
+
 
     public static ExpenseLogsFragment newInstance(ExpenseManager expenseManager) {
         ExpenseLogsFragment expenseLogsFragment = new ExpenseLogsFragment();
@@ -55,7 +55,6 @@ public class ExpenseLogsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.i(TAG,"Logs on create");
         View rootView = inflater.inflate(R.layout.fragment_expense_logs, container, false);
         TableLayout logsTableLayout = (TableLayout) rootView.findViewById(R.id.logs_table);
         TableRow tableRowHeader = (TableRow) rootView.findViewById(R.id.logs_table_header);

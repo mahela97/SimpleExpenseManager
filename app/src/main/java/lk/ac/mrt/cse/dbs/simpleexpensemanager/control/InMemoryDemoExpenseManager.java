@@ -29,7 +29,7 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Account;
  *
  */
 public class InMemoryDemoExpenseManager extends ExpenseManager {
-private static final String TAG = "MyLogs";
+
     public InMemoryDemoExpenseManager(){
     setup();
     }

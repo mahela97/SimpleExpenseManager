@@ -12,7 +12,6 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
 
 public class PersistentMemoryAccountDAO implements AccountDAO {
     private DatabaseHelper database;
-    private static final String TAG = "MyLogs";
 
 
     public PersistentMemoryAccountDAO(DatabaseHelper database){
@@ -46,7 +45,6 @@ public class PersistentMemoryAccountDAO implements AccountDAO {
 
     @Override
     public void removeAccount(String accountNo) throws InvalidAccountException {
-        Log.i(TAG,"deleted");
 database.removeAccount(accountNo);
     }
 

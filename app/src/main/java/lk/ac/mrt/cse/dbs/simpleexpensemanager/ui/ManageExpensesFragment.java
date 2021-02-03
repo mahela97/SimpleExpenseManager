@@ -43,7 +43,7 @@ import static lk.ac.mrt.cse.dbs.simpleexpensemanager.Constants.EXPENSE_MANAGER;
  *
  */
 public class ManageExpensesFragment extends Fragment implements View.OnClickListener {
-    private static final String TAG = "MyLogs";
+
     private Button submitButton;
     private EditText amount;
     private Spinner accountSelector;
@@ -67,7 +67,6 @@ public class ManageExpensesFragment extends Fragment implements View.OnClickList
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.i(TAG,"Manage on create");
 
         View rootView = inflater.inflate(R.layout.fragment_manage_expenses, container, false);
         submitButton = (Button) rootView.findViewById(R.id.submit_amount);
@@ -121,7 +120,7 @@ public class ManageExpensesFragment extends Fragment implements View.OnClickList
                                 ExpenseType.valueOf(type.toUpperCase()), amountStr);
 
                         double crr_balance = currentExpenseManager.getAccountsDAO().getAccount(selectedAccount).getBalance();
-                        balance.setText(selectedAccount+" : "+Double.toString(crr_balance));
+                        balance.setText(selectedAccount+" => "+Double.toString(crr_balance));
 
                     } catch (InvalidAccountException e) {
                         new AlertDialog.Builder(this.getActivity())
@@ -140,7 +139,6 @@ public class ManageExpensesFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.remove_account:
-                Log.i(TAG,"here");
                 selectedAccount = (String) accountSelector.getSelectedItem();
                 try {
                     currentExpenseManager.getAccountsDAO().removeAccount(selectedAccount);

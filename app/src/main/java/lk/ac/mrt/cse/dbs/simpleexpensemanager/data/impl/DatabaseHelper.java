@@ -111,9 +111,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return transactions;
         }
         while(result.moveToNext()){
-
+            //SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            //String strDate = formatter.format(result.getString(1));
             Date date =new Date(result.getLong(1));
-
+            //Date date = new Date(strDate);
             ExpenseType expenseType = ExpenseType.valueOf(result.getString(3));
 
             double amount = Double.parseDouble(result.getString(4));

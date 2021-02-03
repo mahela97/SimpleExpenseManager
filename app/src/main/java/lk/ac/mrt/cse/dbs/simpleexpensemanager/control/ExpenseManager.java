@@ -37,7 +37,7 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
  */
 public abstract class ExpenseManager implements Serializable {
 
-    private static final String TAG = "MyLogs";
+
 
 
 

@@ -100,28 +100,29 @@
 
     <DatePicker
         android:id="@+id/date_selector"
-        android:layout_width="wrap_content"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
-        android:layout_column="1"
         android:layout_row="3"
+        android:layout_column="1"
         android:calendarViewShown="false"
-        android:datePickerMode="spinner"/>
+        android:datePickerMode="spinner" />
 
     <Button
         android:id="@+id/submit_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
+        android:layout_width="152dp"
+        android:layout_height="70dp"
         android:layout_row="4"
-        android:text="@string/submit"/>
+        android:layout_column="0"
+        android:text="@string/submit" />
 
     <Button
         android:id="@+id/remove_account"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100px"
+        android:layout_height="70dp"
         android:layout_row="4"
+        android:layout_marginTop="20px"
         android:layout_column="1"
+        android:layout_marginLeft="100px"
         android:text="Remove Account" />
 
     <TextView
