@@ -18,6 +18,7 @@ package lk.ac.mrt.cse.dbs.simpleexpensemanager.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,8 @@ public class AddAccountFragment extends Fragment implements View.OnClickListener
     private EditText initialBalance;
     private Button addAccount;
 
+    private static final String TAG = "MyLogs";
+
     public static AddAccountFragment newInstance(ExpenseManager expenseManager) {
         AddAccountFragment addAccountFragment = new AddAccountFragment();
         Bundle args = new Bundle();
@@ -52,6 +55,7 @@ public class AddAccountFragment extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG,"add account on create");
         View rootView = inflater.inflate(R.layout.fragment_add_account, container, false);
         accountNumber = (EditText) rootView.findViewById(R.id.account_num);
         bankName = (EditText) rootView.findViewById(R.id.bank_name);

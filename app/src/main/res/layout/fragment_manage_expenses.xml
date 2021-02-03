@@ -115,4 +115,35 @@
         android:layout_row="4"
         android:text="@string/submit"/>
 
+    <Button
+        android:id="@+id/remove_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100px"
+        android:layout_row="4"
+        android:layout_column="1"
+        android:text="Remove Account" />
+
+    <TextView
+        android:id="@+id/current_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100px"
+        android:layout_row="5"
+        android:layout_column="0"
+        android:textSize="50px"
+        android:text="@string/current_balance" />
+
+    <TextView
+        android:id="@+id/balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100px"
+        android:textSize="50px"
+        android:layout_row="5"
+        android:layout_column="1"
+        android:text="@string/balance" />
+
+
+
 </GridLayout>

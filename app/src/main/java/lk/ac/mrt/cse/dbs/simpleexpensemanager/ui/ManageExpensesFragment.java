@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.R;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
@@ -41,12 +43,16 @@ import static lk.ac.mrt.cse.dbs.simpleexpensemanager.Constants.EXPENSE_MANAGER;
  *
  */
 public class ManageExpensesFragment extends Fragment implements View.OnClickListener {
+    private static final String TAG = "MyLogs";
     private Button submitButton;
     private EditText amount;
     private Spinner accountSelector;
     private RadioGroup expenseTypeGroup;
     private DatePicker datePicker;
     private ExpenseManager currentExpenseManager;
+    private TextView balance;
+    private Button removeAccountButton;
+    private ArrayAdapter<String> adapter;
 
     public static ManageExpensesFragment newInstance(ExpenseManager expenseManager) {
         ManageExpensesFragment manageExpensesFragment = new ManageExpensesFragment();
@@ -61,15 +67,21 @@ public class ManageExpensesFragment extends Fragment implements View.OnClickList
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG,"Manage on create");
+
         View rootView = inflater.inflate(R.layout.fragment_manage_expenses, container, false);
         submitButton = (Button) rootView.findViewById(R.id.submit_amount);
         submitButton.setOnClickListener(this);
+        removeAccountButton = (Button) rootView.findViewById(R.id.remove_account);
+        removeAccountButton.setOnClickListener(this);
+
+        balance = (TextView) rootView.findViewById(R.id.balance);
+
 
         amount = (EditText) rootView.findViewById(R.id.amount);
         accountSelector = (Spinner) rootView.findViewById(R.id.account_selector);
         currentExpenseManager = (ExpenseManager) getArguments().get(EXPENSE_MANAGER);
-        ArrayAdapter<String> adapter =
-                null;
+
         if (currentExpenseManager != null) {
             adapter = new ArrayAdapter<>(this.getActivity(), R.layout.support_simple_spinner_dropdown_item,
                     currentExpenseManager.getAccountNumbersList());
@@ -88,6 +100,8 @@ public class ManageExpensesFragment extends Fragment implements View.OnClickList
         switch (view.getId()) {
             case R.id.submit_amount:
                 String selectedAccount = (String) accountSelector.getSelectedItem();
+                selectedAccount = (String) accountSelector.getSelectedItem();
+
                 String amountStr = amount.getText().toString();
                 RadioButton checkedType = (RadioButton) getActivity().findViewById(expenseTypeGroup
                         .getCheckedRadioButtonId());
@@ -105,6 +119,10 @@ public class ManageExpensesFragment extends Fragment implements View.OnClickList
                     try {
                         currentExpenseManager.updateAccountBalance(selectedAccount, day, month, year,
                                 ExpenseType.valueOf(type.toUpperCase()), amountStr);
+
+                        double crr_balance = currentExpenseManager.getAccountsDAO().getAccount(selectedAccount).getBalance();
+                        balance.setText(selectedAccount+" : "+Double.toString(crr_balance));
+
                     } catch (InvalidAccountException e) {
                         new AlertDialog.Builder(this.getActivity())
                                 .setTitle(this.getString(R.string.msg_account_update_unable) + selectedAccount)
@@ -120,6 +138,24 @@ public class ManageExpensesFragment extends Fragment implements View.OnClickList
                 }
                 amount.getText().clear();
                 break;
+
+            case R.id.remove_account:
+                Log.i(TAG,"here");
+                selectedAccount = (String) accountSelector.getSelectedItem();
+                try {
+                    currentExpenseManager.getAccountsDAO().removeAccount(selectedAccount);
+                    if (currentExpenseManager != null) {
+                        adapter = new ArrayAdapter<>(this.getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                                currentExpenseManager.getAccountNumbersList());
+                    }
+                    accountSelector.setAdapter(adapter);
+                } catch (InvalidAccountException e) {
+                    e.printStackTrace();
+                }
+                break;
+
         }
     }
+
+
 }
