@@ -199,10 +199,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             int res1 = sqLiteDatabase.delete(TABLE2_NAME,"ACCOUNT_NO=?;",new String[]{accountNo});
             int res2 = sqLiteDatabase.delete(TABLE1_NAME,"ACCOUNT_NO=?;",new String[]{accountNo});
              }
-
         }
-
-
-
-
 }
